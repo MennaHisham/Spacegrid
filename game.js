@@ -84,7 +84,12 @@ class Game{
             this.level1.drawUp();
            
          } 
-         
+         resetLevel(){
+
+         }
+
+
+
          //Second Level
          if(this.counter===2){
 
@@ -187,6 +192,7 @@ class Game{
     //   );
     //  }
 
+    // hello
         
       }
 
