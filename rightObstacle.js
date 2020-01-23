@@ -11,7 +11,7 @@ class RightObstacle{
         this.imageRight=loadImage("assets/rightObstacle.png");
     }
     drawRight(){
-      this.y = (this.y + 2) % height
+      this.y = (this.y + 2) % width
         image(rightObstacle.imageRight,this.x ,this.y,this.width,this.height);
      }
 

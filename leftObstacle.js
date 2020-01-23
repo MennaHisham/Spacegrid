@@ -11,7 +11,7 @@ class LeftObstacle{
         this.imageLeft=loadImage("assets/leftObstacle.png");
     }
     drawLeft(){
-      this.y = (this.y + 3) % height
+      this.y = (this.y + 3) % width
         image(leftObstacle.imageLeft,this.x ,this.y,this.width,this.height);
      }
 

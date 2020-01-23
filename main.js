@@ -30,7 +30,6 @@ function keyPressed(){
 
       if(keyCode===13){
         loop();
-        document.getElementById('demotext').style.visibility = 'hidden'
         game.restartLevel();
       }
 
@@ -47,7 +46,7 @@ function setup(){
     // button = createButton('click me');
     // button.hide()
     // button.mousePressed(reloadPage);
-    document.getElementById('demotext').style.visibility = 'hidden'
+    //document.getElementById('demotext').style.visibility = 'hidden'
 }
 
 

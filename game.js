@@ -144,8 +144,10 @@ class Game{
 
         //Right Obstacle
         if (this.level4.collides(player)) {
-          console.log("collision");
+          this.restartText();
+          this.restartLevel();
         }
+
         this.level4.drawRight();
 
      
@@ -157,16 +159,13 @@ class Game{
 
       this.obstacles41.forEach(function(obstacle) {
         if (obstacle.collides(player)) {
-          button.show();
-          button.position(50, 50)
-          //this.restartLevel();
-            console.log("collision");
+          this.restartText();
+          this.restartLevel();
         }
-      });
+      }.bind(this));
 
       this.obstacles41.forEach(function(obstacle) {
         obstacle.drawUp();
-        //obstacle2.drawLeft();
       }.bind(this)
       );
 
@@ -178,14 +177,15 @@ class Game{
   }
       this.obstacles42.forEach(function(obstacle) {
         if (obstacle.collides(player)) {
-        //this.restartLevel();
-        console.log("collisionDOWN");
+          this.restartText();
+          this.restartLevel();
+        
     }
-  });
+  }.bind(this));
   
       this.obstacles42.forEach(function(obstacle) {
         obstacle.drawDown();
-        //obstacle2.drawLeft();
+        
       }.bind(this)
       );
       
@@ -195,31 +195,32 @@ class Game{
 
      if(this.counter===5){
       if (this.level4.collides(player)) {
-        console.log("collisionRIGHT");
+        this.restartText();
+        this.restartLevel();
       }
       this.level4.drawRight();
 
       if (this.level5.collides(player)) {
-        console.log("collisionLEFT");
+        this.restartText();
+        this.restartLevel();
       }
 
         this.level5.drawLeft();
         
 
-
          //Up Obstacles
-         for(let j=0;j<3;j++) {
-          if(this.obstacles41.length<3){
+         for(let j=0;j<5;j++) {
+          if(this.obstacles41.length<5){
           this.obstacles41.push(new UpObstacle(200,j));
           }
     }
 
     this.obstacles41.forEach(function(obstacle) {
       if (obstacle.collides(player)) {
-        //this.restartLevel();
-          console.log("collisionUP");
+        this.restartText();
+        this.restartLevel();
       }
-    });
+    }.bind(this));
 
     this.obstacles41.forEach(function(obstacle) {
       obstacle.drawUp();
@@ -236,10 +237,10 @@ class Game{
 }
     this.obstacles42.forEach(function(obstacle) {
       if (obstacle.collides(player)) {
-      //this.restartLevel();
-      console.log("collisionDOWN");
+        this.restartText();
+        this.restartLevel();
   }
-});
+}.bind(this));
 
     this.obstacles42.forEach(function(obstacle) {
       obstacle.drawDown();
@@ -261,7 +262,6 @@ class Game{
       text('Press ENTER ', 400, 375 );
       text("to restart",400,425)
       //this.gameOver = true;
-      document.getElementById('demotext').style.visibility = 'visible'
 
       noLoop();
      }
@@ -279,6 +279,7 @@ class Game{
               player.x = 380;
               player.y = 380;
 
+            //Restart Level 2
             if(this.counter===2){
               this.obstacles2.splice(0,this.obstacles2.length);
               for(let j=0;j<5;j++) {
@@ -297,12 +298,43 @@ class Game{
                 if(this.obstacles31.length<5)
                 this.obstacles31.push(new UpObstacle(300,j));
           }
-          for(let j=0;j<5;j++) {
-            if(this.obstacles32.length<5){
-             this.obstacles32.push(new DownObstacle(400,j));
+              for(let j=0;j<5;j++) {
+              if(this.obstacles32.length<5){
+              this.obstacles32.push(new DownObstacle(400,j));
             }
           }
             }
+
+            //Restart Level4
+        if(this.counter===4){
+              this.obstacles41.splice(0,this.obstacles41.length);
+              this.obstacles42.splice(0,this.obstacles42.length);
+            for(let j=0;j<5;j++) {
+            if(this.obstacles41.length<5)
+              this.obstacles41.push(new UpObstacle(200,j));
+        }
+            for(let j=0;j<5;j++) {
+            if(this.obstacles42.length<5)
+            this.obstacles42.push(new DownObstacle(200,j));
+    }
+      }
+
+        //Restart Level 5
+        if(this.counter===5){
+          this.obstacles41.splice(0,this.obstacles41.length);
+          this.obstacles42.splice(0,this.obstacles42.length);
+          for(let j=0;j<3;j++) {
+            if(this.obstacles41.length<3){
+            this.obstacles41.push(new UpObstacle(200,j));
+            }
+      }
+
+      for(let j=0;j<5;j++) {
+        if(this.obstacles42.length<5){
+        this.obstacles42.push(new DownObstacle(400,j));
+        }
+      }
+        }
        }
 
        restartButton(){

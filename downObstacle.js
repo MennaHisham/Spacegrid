@@ -11,7 +11,7 @@ class DownObstacle{
         this.imageDown=loadImage("assets/obstacleReversed.png");
     }
     drawDown(){
-      this.x = (this.x + 3) % width
+      this.x = (this.x + 4) % width
         image(downObstacle.imageDown,this.x ,this.y,this.width,this.height);
      }
 
