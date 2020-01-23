@@ -13,10 +13,11 @@ class UpObstacle{
    }
 
    drawUp(){
-      this.x = (this.x + 5) % width ;
+      this.x = (this.x + 4) % width ;
       //console.log(frameCount);
       image(upObstacle.image,this.x,this.y,this.width,this.height);
    }
+
 
    // drawReversed(){
    //    image(firstLevel.imageRev,(this.x+frameCount)*2 % width ,450,this.width,this.height);
@@ -39,7 +40,7 @@ class UpObstacle{
 
             return false;
       }
-
+      
       return true;
     
   }

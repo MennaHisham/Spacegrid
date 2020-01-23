@@ -4,8 +4,11 @@ const player=new Player();
 const upObstacle=new UpObstacle();
 const downObstacle=new DownObstacle();
 const transition= new Transition();
+const rightObstacle=new RightObstacle();
+const leftObstacle=new LeftObstacle();
 
 let backgroundPic;
+//let button;
 //let slimePic;
 
 function keyPressed(){
@@ -25,6 +28,12 @@ function keyPressed(){
         player.moveUp();
       }
 
+      if(keyCode===13){
+        loop();
+        document.getElementById('demotext').style.visibility = 'hidden'
+        game.restartLevel();
+      }
+
 }
 
 function preload(){
@@ -35,14 +44,27 @@ function preload(){
 
 function setup(){  
     createCanvas(800,800);
+    // button = createButton('click me');
+    // button.hide()
+    // button.mousePressed(reloadPage);
+    document.getElementById('demotext').style.visibility = 'hidden'
 }
+
 
 function draw(){ //60x per second
     image(backgroundPic,0,0)
-    game.setup() // draws the grid
+    game.setup(); // draws the grid
     game.draw(); // draws the player and the collectables
+   
+    
 
 }
+
+
+
+// function reloadPage() {
+//   document.location.reload()
+// }
 
 
 document.body.style.display = "flex";

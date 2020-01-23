@@ -1,0 +1,20 @@
+.demotext {
+    color: #FFFFFF;
+    text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+    color: #FFFFFF;
+    position: absolute;
+    z-index: 100;
+    left: 300px;
+    /* //textAlign:CENTER; */
+    }
+    #demotext {
+        position: absolute;
+        z-index: 1000;
+        left: 48vw;
+        top: 20vh;
+        color: #FFFFFF;
+        text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+        color: #FFFFFF;
+
+        /* //textAlign:CENTER; */
+        }

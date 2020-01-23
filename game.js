@@ -16,9 +16,23 @@ class Game{
          this.obstacles2=[];
          this.obstacles31=[];
          this.obstacles32=[];
-         this.obstacles4=[];
+         this.obstacles41=[];
+         this.obstacles42=[]
+         this.collectables2=
+          [
+          new Collectable(280, 280),
+          new Collectable(280, 380),
+          new Collectable(280, 480),
+          new Collectable(380, 280),
+          new Collectable(380, 480),
+          new Collectable(480, 280),
+          new Collectable(480, 380),
+          new Collectable(480, 480),
+          ];
 
          this.level1 = new UpObstacle(200,0);
+         this.level4=new RightObstacle(700,0);
+         this.level5= new LeftObstacle(200,0);
 
      }
 
@@ -40,76 +54,45 @@ class Game{
         if(this.collectables.length ===0 && this.counter <5){
             
             transition.draw();
-
             this.counter++;
 
-                 let collectables2= 
-                 [
-                 new Collectable(280, 280),
-                 new Collectable(280, 380),
-                 new Collectable(280, 480),
-                 new Collectable(380, 280),
-                 new Collectable(380, 480),
-                 new Collectable(480, 280),
-                 new Collectable(480, 380),
-                 new Collectable(480, 480),
-                 ]
-                 for(let i =0; i<8;i++){
-                 collectables2[i].preload();
-                 this.collectables.push(collectables2[i]);
-                 }
-                 
-                 player.x = 380;
-                 player.y = 380;
-
-
+            this.restartLevel();
+          
             
         }
         //First level
         if(this.counter===1){
             
             if (this.level1.collides(player)) {
-
-            /* todo
-            - reset level function
-            - reset this.score 
-            - empty collactable array 
-            - fill up array again according to the level
-            */
+              this.restartText();
+              this.restartLevel();
                 
-                
-                console.log("collision");
               }
               //console.log(this.level1.x);
-            this.level1.drawUp();
+              this.level1.drawUp();
            
          } 
-         resetLevel(){
-
-         }
+        
 
 
 
          //Second Level
          if(this.counter===2){
-
             //Array to store UpObstacle
             for(let j=0;j<5;j++) {
                 if(this.obstacles2.length<5)
                 this.obstacles2.push(new UpObstacle(400,j));
-                console.log(j);
-
-
-
             }
+
                 //check for collision
                 this.obstacles2.forEach(function(obstacle) {
                 if (obstacle.collides(player)) {
+                   this.restartText();
+                  this.restartLevel();
                     console.log("collision");
                 }
-            });
-          
-        
+
+            }.bind(this));
                 this.obstacles2.forEach(function(obstacle) {
                     obstacle.drawUp();
                 }.bind(this)
@@ -125,9 +108,11 @@ class Game{
            //Checks Collision third level
           this.obstacles31.forEach(function(obstacle) {
             if (obstacle.collides(player)) {
+              this.restartText();
+              this.restartLevel();
                 console.log("collisionUP");
             }
-        });
+        }.bind(this));
 
           this.obstacles31.forEach(function(obstacle) {
             obstacle.drawUp();
@@ -142,9 +127,10 @@ class Game{
             }
           this.obstacles32.forEach(function(obstacle) {
             if (obstacle.collides(player)) {
-            console.log("collisionDown");
+              this.restartText();
+              this.restartLevel();
             }
-        });
+        }.bind(this));
     
           this.obstacles32.forEach(function(obstacle3) {
             obstacle3.drawDown();
@@ -156,17 +142,49 @@ class Game{
       //Fourth Level
       if(this.counter===4){
 
-        //Down Obstacle
-        const level4=new DownObstacle(200,0);
-        level4.drawDown();
-        
+        //Right Obstacle
+        if (this.level4.collides(player)) {
+          console.log("collision");
+        }
+        this.level4.drawRight();
+
+     
         //Up Obstacles
         for(let j=0;j<5;j++) {
-            if(this.obstacles2.length<5)
-            this.obstacles2.push(new UpObstacle(200,j));
+            if(this.obstacles41.length<5)
+            this.obstacles41.push(new UpObstacle(200,j));
       }
-      this.obstacles2.forEach(function(obstacle2) {
-        obstacle2.drawUp();
+
+      this.obstacles41.forEach(function(obstacle) {
+        if (obstacle.collides(player)) {
+          button.show();
+          button.position(50, 50)
+          //this.restartLevel();
+            console.log("collision");
+        }
+      });
+
+      this.obstacles41.forEach(function(obstacle) {
+        obstacle.drawUp();
+        //obstacle2.drawLeft();
+      }.bind(this)
+      );
+
+
+      //Down Obstacles
+      for(let j=0;j<5;j++) {
+        if(this.obstacles42.length<5)
+        this.obstacles42.push(new DownObstacle(200,j));
+  }
+      this.obstacles42.forEach(function(obstacle) {
+        if (obstacle.collides(player)) {
+        //this.restartLevel();
+        console.log("collisionDOWN");
+    }
+  });
+  
+      this.obstacles42.forEach(function(obstacle) {
+        obstacle.drawDown();
         //obstacle2.drawLeft();
       }.bind(this)
       );
@@ -175,26 +193,122 @@ class Game{
 
      //Fifth Level
 
-    //  if(this.counter===5){
-    //     const level4=new upObstacle(200,0);
-    //     level4.drawReversed();
-    //     //level4.drawLeft();
-    //     //level4.draw();
-    //     for(let j=0;j<5;j++) {
-    //         if(this.obstacles2.length<5)
-    //         this.obstacles2.push(new FirstLevel(200,j));
-    //   }
-    //   this.obstacles2.forEach(function(obstacle2) {
-    //     obstacle2.draw();
-    //     obstacle2.drawLeft();
-    //     obstacle2.drawRight();
-    //   }.bind(this)
-    //   );
-    //  }
+     if(this.counter===5){
+      if (this.level4.collides(player)) {
+        console.log("collisionRIGHT");
+      }
+      this.level4.drawRight();
 
-    // hello
+      if (this.level5.collides(player)) {
+        console.log("collisionLEFT");
+      }
+
+        this.level5.drawLeft();
+        
+
+
+         //Up Obstacles
+         for(let j=0;j<3;j++) {
+          if(this.obstacles41.length<3){
+          this.obstacles41.push(new UpObstacle(200,j));
+          }
+    }
+
+    this.obstacles41.forEach(function(obstacle) {
+      if (obstacle.collides(player)) {
+        //this.restartLevel();
+          console.log("collisionUP");
+      }
+    });
+
+    this.obstacles41.forEach(function(obstacle) {
+      obstacle.drawUp();
+      //obstacle2.drawLeft();
+    }.bind(this)
+    );
+
+
+    //Down Obstacles
+    for(let j=0;j<5;j++) {
+      if(this.obstacles42.length<5){
+      this.obstacles42.push(new DownObstacle(400,j));
+      }
+}
+    this.obstacles42.forEach(function(obstacle) {
+      if (obstacle.collides(player)) {
+      //this.restartLevel();
+      console.log("collisionDOWN");
+  }
+});
+
+    this.obstacles42.forEach(function(obstacle) {
+      obstacle.drawDown();
+      //obstacle2.drawLeft();
+    }.bind(this)
+    );
         
       }
+    }
+     restartText(){
+       clear();
+      transition.draw();
+      textSize(80);
+      textAlign(CENTER);
+      textFont('Bungee');
+      fill(65);
+      //text(`GAME OVER`, 380, 380);
+      textSize(40);
+      text('Press ENTER ', 400, 375 );
+      text("to restart",400,425)
+      //this.gameOver = true;
+      document.getElementById('demotext').style.visibility = 'visible'
+
+      noLoop();
+     }
+
+      restartLevel(){
+        this.score=0;
+        document.querySelector(".score").innerHTML = this.score;
+        this.collectables.splice(0, this.collectables.length);
+        
+          for(let i =0; i<8;i++){
+             this.collectables2[i].preload();
+             this.collectables.push(this.collectables2[i]);
+            }
+                 
+              player.x = 380;
+              player.y = 380;
+
+            if(this.counter===2){
+              this.obstacles2.splice(0,this.obstacles2.length);
+              for(let j=0;j<5;j++) {
+                if(this.obstacles2.length<5)
+                this.obstacles2.push(new UpObstacle(400,j));
+                
+                }
+            }
+
+            //RestartLevel 3
+            if(this.counter===3){
+              this.obstacles31.splice(0,this.obstacles31.length);
+              this.obstacles32.splice(0,this.obstacles32.length);
+
+              for(let j=0;j<5;j++) {
+                if(this.obstacles31.length<5)
+                this.obstacles31.push(new UpObstacle(300,j));
+          }
+          for(let j=0;j<5;j++) {
+            if(this.obstacles32.length<5){
+             this.obstacles32.push(new DownObstacle(400,j));
+            }
+          }
+            }
+       }
+
+       restartButton(){
+         button.show()
+         button.position(50, 50)
+       }
 
 
     preload(){
@@ -205,7 +319,9 @@ class Game{
         player.preload();
         this.collectables.forEach(function(collectable) {
             collectable.preload()
-        })
+        });
+        rightObstacle.preload();
+        leftObstacle.preload();
         
     }
     setup(){
