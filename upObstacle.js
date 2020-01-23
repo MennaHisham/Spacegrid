@@ -12,10 +12,8 @@ class UpObstacle {
   }
 
   drawUp() {
-    if (!game.gameOver) {
-      this.x = (this.x + 4) % width;
-      image(upObstacle.image, this.x, this.y, this.width, this.height);
-    }
+    this.x = (this.x + 4) % width;
+    image(upObstacle.image, this.x, this.y, this.width, this.height);
   }
 
   // drawReversed(){

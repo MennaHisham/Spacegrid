@@ -10,10 +10,8 @@ class RightObstacle {
     this.imageRight = loadImage('assets/rightObstacle.png');
   }
   drawRight() {
-    if (!game.gameOver) {
-      this.y = (this.y + 2) % width;
-      image(rightObstacle.imageRight, this.x, this.y, this.width, this.height);
-    }
+    this.y = (this.y + 2) % width;
+    image(rightObstacle.imageRight, this.x, this.y, this.width, this.height);
   }
 
   collides(obj) {
