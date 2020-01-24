@@ -1,3 +1,4 @@
+const startPage= new StartPage();
 const game = new Game();
 const collectable = new Collectable();
 const player=new Player();
@@ -8,6 +9,7 @@ const rightObstacle=new RightObstacle();
 const leftObstacle=new LeftObstacle();
 
 let backgroundPic;
+let frontStart;
 //let button;
 //let slimePic;
 
@@ -32,17 +34,25 @@ function keyPressed(){
         loop();
         game.restartLevel();
       }
+      if(keyCode===32){
+        game.start=true;
+        loop();
+        //game.draw();
+        
+      }
 
 }
 
 function preload(){
-    backgroundPic= loadImage("assets/background.jpg");
+  //frontStart=loadImage("assets/frontPage.png");
+   backgroundPic= loadImage("assets/background.jpg");
     game.preload();
     
 }
 
 function setup(){  
     createCanvas(800,800);
+    //startPage.startPageDraw();
     // button = createButton('click me');
     // button.hide()
     // button.mousePressed(reloadPage);
@@ -51,11 +61,16 @@ function setup(){
 
 
 function draw(){ //60x per second
+  if(game.start){
     image(backgroundPic,0,0)
     game.setup(); // draws the grid
-    game.draw(); // draws the player and the collectables
+    game.draw();
+  }
+  else{
+    startPage.draw()
+  }
+ // draws the player and the collectables
    
-    
 
 }
 

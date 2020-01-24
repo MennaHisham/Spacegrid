@@ -28,7 +28,7 @@ class Game {
       new Collectable(480, 380),
       new Collectable(480, 480)
     ];
-
+    this.gameStart=false
     this.level1 = new UpObstacle(200, 0);
     this.level4 = new RightObstacle(700, 0);
     this.level5 = new LeftObstacle(200, 0);
@@ -36,6 +36,7 @@ class Game {
 
   draw() {
     //60 x per sec
+    
     this.drawScore(this.score);
     player.draw();
     // loop to remove collectable when collides
@@ -44,15 +45,15 @@ class Game {
         collectable.draw();
         if (collectable.collected(player)) {
           this.score += 1;
-          document.querySelector('.score').innerHTML = this.score;
+          //document.querySelector('.score').innerHTML = this.score;
           this.collectables.splice(index, 1);
         }
       }.bind(this)
     );
 
     //creates new collectables in for the next 5 levels
-    if (this.collectables.length === 0 && this.counter < 5) {
-      transition.draw();
+    if (this.collectables.length === 0 && this.counter < 6) {
+      //transition.draw();
       this.counter++;
 
       this.restartLevel();
@@ -191,7 +192,7 @@ class Game {
       //Up Obstacles
       for (let j = 0; j < 5; j++) {
         if (this.obstacles41.length < 5) {
-          this.obstacles41.push(new UpObstacle(200, j));
+          this.obstacles41.push(new UpObstacle(100, j));
         }
       }
 
@@ -214,7 +215,7 @@ class Game {
       //Down Obstacles
       for (let j = 0; j < 5; j++) {
         if (this.obstacles42.length < 5) {
-          this.obstacles42.push(new DownObstacle(400, j));
+          this.obstacles42.push(new DownObstacle(200, j));
         }
       }
       this.obstacles42.forEach(
@@ -233,6 +234,10 @@ class Game {
         }.bind(this)
       );
     }
+
+    if(this.counter===6){
+      image(this.endLevel,0,0,800,800);
+    }
   }
   restartText() {
     this.gameOver = true;
@@ -241,7 +246,7 @@ class Game {
     textSize(80);
     textAlign(CENTER);
     textFont('Bungee');
-    fill(65);
+    fill('rgb(0,255,0)');
     //text(`GAME OVER`, 380, 380);
     textSize(40);
     text('Press ENTER ', 400, 375);
@@ -253,7 +258,7 @@ class Game {
       Math.floor(Math.random() * 255),
       Math.floor(Math.random() * 255)
     ); // color
-    text(`Your Final Score: `, 400, 50);
+    text(`Final Score: `, 400, 50);
     textSize(60);
     text(this.previousScore, 400, 150);
     noLoop();
@@ -263,7 +268,7 @@ class Game {
     this.gameOver = false;
     this.previousScore = this.score;
     this.score = 0;
-    document.querySelector('.score').innerHTML = this.score;
+    //document.querySelector('.score').innerHTML = this.score;
     this.collectables.splice(0, this.collectables.length);
 
     for (let i = 0; i < 8; i++) {
@@ -317,27 +322,30 @@ class Game {
     if (this.counter === 5) {
       this.obstacles41.splice(0, this.obstacles41.length);
       this.obstacles42.splice(0, this.obstacles42.length);
-      for (let j = 0; j < 3; j++) {
-        if (this.obstacles41.length < 3) {
-          this.obstacles41.push(new UpObstacle(200, j));
+      for (let j = 0; j < 5; j++) {
+        if (this.obstacles41.length < 5) {
+          this.obstacles41.push(new UpObstacle(100, j));
         }
       }
 
       for (let j = 0; j < 5; j++) {
         if (this.obstacles42.length < 5) {
-          this.obstacles42.push(new DownObstacle(400, j));
+          this.obstacles42.push(new DownObstacle(200, j));
         }
       }
     }
   }
 
-  restartButton() {
-    button.show();
-    button.position(50, 50);
-  }
+  // restartButton() {
+  //   button.show();
+  //   button.position(50, 50);
+  // }
 
   preload() {
     // 1 time before setup
+    //this.startPage=loadImage("assets/frontPage.png");
+    //backgroundPic= loadImage("assets/background.jpg");
+    this.endLevel = loadImage('assets/endLevel.png');
     transition.preload();
     upObstacle.preload();
     downObstacle.preload();
@@ -347,9 +355,15 @@ class Game {
     });
     rightObstacle.preload();
     leftObstacle.preload();
+    startPage.preload();
+    
   }
   setup() {
     //setup for grid
+    //image(this.startPage, 0, 0, 800, 800);
+    //startPage.startPageDraw();
+    //noLoop();
+    
     for (let i = 300; i < 600; i += 100) {
       line(200, i, 600, i);
       line(i, 200, i, 600);

@@ -1,6 +1,6 @@
 class Transition{
     preload(){
-        this.img=loadImage("assets/restartLevel.jpg");
+        this.img=loadImage("assets/restartLevel.png");
     }
 
        draw(){
